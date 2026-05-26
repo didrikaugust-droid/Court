@@ -1,98 +1,37 @@
-:root {
-  --bg: #f6f7fb;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --accent: #ff4d1a;
-}
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
-  background: var(--bg);
-  display: flex;
-  justify-content: center;
+  font-family: -apple-system, Inter, sans-serif;
+  background: #f5f7fb;
 }
 
-/* 📱 APP FRAME */
-.app {
-  width: 100%;
+.container {
   max-width: 420px;
-  min-height: 100vh;
-  background: var(--bg);
-  position: relative;
-  overflow-x: hidden;
+  margin: auto;
+  padding: 16px;
 }
 
-/* SCREEN TRANSITIONS */
-.screen {
-  padding: 18px;
-  animation: fade 0.25s ease;
-}
-
-@keyframes fade {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* APP BAR */
-.header {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-/* CARD */
 .card {
-  background: var(--card);
+  background: white;
   border-radius: 18px;
   padding: 14px;
   margin-bottom: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 }
 
-/* INPUT */
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ff4d1a;
+  color: white;
+  font-weight: 700;
+}
+
 input {
   width: 100%;
   padding: 12px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   margin-top: 8px;
-}
-
-/* BUTTON */
-button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: var(--accent);
-  color: white;
-  font-weight: 700;
-  margin-top: 10px;
-}
-
-/* BOTTOM NAV */
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  background: white;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-
-.nav button {
-  background: none;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.nav .active {
-  color: var(--accent);
 }
