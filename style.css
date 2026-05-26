@@ -1,32 +1,114 @@
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #ff4d1a;
+}
+
 body {
-  font-family: Arial;
-  background: #f2f4f7;
+  margin: 0;
+  font-family: Inter, system-ui;
+  background: var(--bg);
+  color: var(--text);
 }
 
+/* LAYOUT */
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* HEADER */
+.top {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+/* CARDS (IMPORTANT) */
 .card {
-  background: white;
-  padding: 14px;
-  margin: 10px;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-  animation: pop 0.2s ease;
+  background: var(--card);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  transition: 0.25s ease;
 }
 
-@keyframes pop {
-  from { transform: scale(0.98); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.card:hover {
+  transform: translateY(-2px);
 }
 
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  margin-top: 8px;
+}
+
+/* BUTTON */
 button {
-  margin: 5px;
-  background: #fc4c02;
-  color: white;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
   border: none;
-  padding: 8px 10px;
-  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+}
+
+/* FEED POST */
+.post-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  background: #fff1ec;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+/* STATS GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.stat p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: var(--muted);
 }
