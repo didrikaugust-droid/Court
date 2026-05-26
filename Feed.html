@@ -1,0 +1,23 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function Login() {
+  const nav = useNavigate();
+  const [name, setName] = useState("");
+
+  function login() {
+    if (!name) return;
+    localStorage.setItem("user", name);
+    nav("/feed");
+  }
+
+  return (
+    <div className="container">
+      <div className="card">
+        <h2>COURT 🎾</h2>
+        <input onChange={e => setName(e.target.value)} placeholder="username" />
+        <button onClick={login}>Enter</button>
+      </div>
+    </div>
+  );
+}
