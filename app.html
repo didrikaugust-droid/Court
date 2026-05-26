@@ -2,153 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CourtTrack</title>
+<title>CourtTrack v6</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
   <div class="logo">CourtTrack</div>
-  <div>
-    <button onclick="view('feed')">Feed</button>
-    <button onclick="view('users')">Users</button>
-    <button onclick="view('profile')">Profile</button>
-  </div>
 </nav>
 
 <div class="container">
 
 <!-- FEED -->
-<div id="feed" class="fade">
+<div id="feedView">
 
   <h2 id="welcome"></h2>
 
   <div class="card">
-    <h3>Post match</h3>
+    <h3>Post Activity</h3>
     <input id="opponent" placeholder="Opponent">
-    <input id="score" placeholder="Score (6-4, 3-6, 6-2)">
-    <button onclick="post()">Post match</button>
+    <input id="score" placeholder="Score">
+
+    <button onclick="post()">Post Match</button>
   </div>
 
-  <div id="posts"></div>
-</div>
-
-<!-- USERS -->
-<div id="users" class="fade" style="display:none;">
-  <h2>Players</h2>
-  <div id="userList"></div>
+  <div id="feed"></div>
 </div>
 
 <!-- PROFILE -->
-<div id="profile" class="fade" style="display:none;">
-  <div class="profile">
+<div id="profileView" style="display:none;">
+  <div class="card">
     <h2 id="profileName"></h2>
     <p id="stats"></p>
+    <button onclick="toggleFollow()">Follow</button>
   </div>
 
-  <div id="profilePosts"></div>
+  <div id="profileFeed"></div>
+</div>
+
+<!-- LEADERBOARD -->
+<div id="leaderboardView" style="display:none;">
+  <h2>Leaderboard</h2>
+  <div id="board"></div>
 </div>
 
 </div>
 
-<script>
-let user = localStorage.getItem("user");
-let viewing = null;
+<!-- BOTTOM NAV -->
+<div class="bottomNav">
+  <button onclick="show('feed')">Feed</button>
+  <button onclick="show('leaderboard')">Rank</button>
+  <button onclick="show('profile')">Profile</button>
+</div>
 
-let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-let likes = JSON.parse(localStorage.getItem("likes") || "{}");
-
-/* NAV */
-function view(page){
-  feed.style.display="none";
-  users.style.display="none";
-  profile.style.display="none";
-  document.getElementById(page).style.display="block";
-
-  if(page==="feed") renderFeed();
-  if(page==="users") renderUsers();
-  if(page==="profile") renderProfile(viewing || user);
-}
-
-/* POST */
-function post(){
-  posts.unshift({
-    user,
-    opponent: opponent.value,
-    score: score.value,
-    id: Date.now()
-  });
-
-  localStorage.setItem("posts", JSON.stringify(posts));
-  renderFeed();
-}
-
-/* FEED */
-function renderFeed(){
-  document.getElementById("welcome").innerText = "Welcome, " + user;
-
-  document.getElementById("posts").innerHTML =
-  posts.map(p => `
-    <div class="card">
-      <div class="user" onclick="openProfile('${p.user}')">${p.user}</div>
-      <div class="small">vs ${p.opponent}</div>
-      <h2>${p.score}</h2>
-
-      <div class="heart" onclick="like(${p.id})">
-        ❤️ ${likes[p.id] || 0}
-      </div>
-    </div>
-  `).join("");
-}
-
-/* LIKE */
-function like(id){
-  likes[id] = (likes[id] || 0) + 1;
-  localStorage.setItem("likes", JSON.stringify(likes));
-  renderFeed();
-}
-
-/* USERS */
-function renderUsers(){
-  let unique = [...new Set(posts.map(p => p.user))];
-
-  document.getElementById("userList").innerHTML =
-  unique.map(u => `
-    <div class="card" onclick="openProfile('${u}')">
-      <h3>${u}</h3>
-    </div>
-  `).join("");
-}
-
-/* PROFILE */
-function openProfile(u){
-  viewing = u;
-  view("profile");
-  renderProfile(u);
-}
-
-function renderProfile(u){
-  document.getElementById("profileName").innerText = u;
-
-  let userPosts = posts.filter(p => p.user === u);
-
-  document.getElementById("stats").innerText =
-    "Matches: " + userPosts.length;
-
-  document.getElementById("profilePosts").innerHTML =
-  userPosts.map(p => `
-    <div class="card">
-      <div class="small">vs ${p.opponent}</div>
-      <h2>${p.score}</h2>
-    </div>
-  `).join("");
-}
-
-/* INIT */
-if(user){
-  view("feed");
-}
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
