@@ -2,27 +2,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CourtTrack Login</title>
+<title>CourtTrack v6</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container" style="display:flex;justify-content:center;align-items:center;height:100vh;">
-  <div class="card" style="width:320px;text-align:center;">
+  <div class="card" style="width:340px;text-align:center;">
     <h1 style="color:#fc5200;">CourtTrack</h1>
-    <p class="small">Strava for tennis players</p>
+    <p class="small">Strava for Tennis Athletes</p>
 
     <input id="name" placeholder="Name">
     <input id="pass" type="password" placeholder="Password">
 
-    <button onclick="login()">Enter</button>
+    <button onclick="login()">Enter App</button>
   </div>
 </div>
 
 <script>
 function login(){
-  localStorage.setItem("user", document.getElementById("name").value);
-  window.location.href = "app.html";
+  localStorage.setItem("user", name.value);
+  window.location.href="app.html";
 }
 </script>
 
