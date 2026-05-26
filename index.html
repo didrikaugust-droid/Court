@@ -1,104 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>CourtTrack</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Court</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="logo">CourtTrack</div>
-</nav>
-
 <div class="container">
-
-<!-- HERO -->
-<div id="hero"></div>
-
-<!-- POST -->
-<div class="card">
-  <h3>Log Match</h3>
-  <input id="opponent" placeholder="Opponent">
-  <input id="score" placeholder="Score (6-4, 3-6, 6-2)">
-  <button onclick="post()">Publish match</button>
+  <div id="app"></div>
 </div>
 
-<!-- FEED -->
-<div id="feed"></div>
-
-</div>
-
-<!-- NAV -->
-<div class="bottomNav">
-  <button onclick="render()">Feed</button>
-  <button onclick="render()">Rank</button>
-  <button onclick="render()">Profile</button>
-</div>
-
-<script>
-let user = localStorage.getItem("user");
-
-let posts = JSON.parse(localStorage.getItem("posts")||"[]");
-let likes = JSON.parse(localStorage.getItem("likes")||"{}");
-
-/* HERO = FIRST IMPRESSION */
-function renderHero(){
-  hero.innerHTML=`
-    <div class="heroCard">
-      <h2 style="margin:0;">Welcome back, ${user}</h2>
-      <p style="opacity:0.9;">Track performance. Dominate matches.</p>
-
-      <div class="heroStats">
-        <div><b>${posts.filter(p=>p.user===user).length}</b><br>Matches</div>
-        <div><b>${Object.values(likes).reduce((a,b)=>a+b,0)}</b><br>Kudos</div>
-        <div><b>${new Set(posts.map(p=>p.user)).size}</b><br>Athletes</div>
-      </div>
-    </div>
-  `;
-}
-
-/* POST */
-function post(){
-  posts.unshift({
-    id:Date.now(),
-    user,
-    opponent:opponent.value,
-    score:score.value
-  });
-
-  localStorage.setItem("posts",JSON.stringify(posts));
-  render();
-}
-
-/* FEED */
-function render(){
-  renderHero();
-
-  feed.innerHTML = posts.map(p=>`
-    <div class="card">
-      <div class="user">${p.user}</div>
-      <div class="small">vs ${p.opponent}</div>
-      <h2>${p.score}</h2>
-
-      <div class="heart" onclick="like(${p.id})">
-        ❤️ ${likes[p.id]||0} kudos
-      </div>
-
-      <div class="map"></div>
-    </div>
-  `).join("");
-}
-
-/* LIKE */
-function like(id){
-  likes[id]=(likes[id]||0)+1;
-  localStorage.setItem("likes",JSON.stringify(likes));
-  render();
-}
-
-render();
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
