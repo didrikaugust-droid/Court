@@ -1,0 +1,17 @@
+export default function Leaderboard() {
+  const users = ["you (placeholder)", "player2", "player3"];
+
+  return (
+    <div className="container">
+      <div className="card">
+        <h2>🏆 Leaderboard</h2>
+      </div>
+
+      {users.map(u => (
+        <div className="card" key={u}>
+          {u} — 10 wins
+        </div>
+      ))}
+    </div>
+  );
+}
