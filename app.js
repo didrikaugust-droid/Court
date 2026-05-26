@@ -1,36 +1,39 @@
-// ===== STORAGE =====
 let user = JSON.parse(localStorage.getItem("user"));
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
-// ===== SAVE =====
 function save() {
   localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem("posts", JSON.stringify(posts));
 }
 
-// ===== INIT =====
 render();
 
-// ===== LOGIN =====
-function loginPage() {
+function render() {
+  if (!user) return login();
+  return feed();
+}
+
+/* ---------- LOGIN ---------- */
+function login() {
   document.getElementById("app").innerHTML = `
     <div class="card">
-      <h1>COURT 🎾</h1>
-      <p>Sign in to join the tennis network</p>
+      <div class="top">Court 🎾</div>
+      <div style="color:#64748b;font-size:13px">
+        Tennis performance tracker
+      </div>
 
       <input id="name" placeholder="username"/>
-      <button onclick="login()">Continue</button>
+      <button onclick="doLogin()">Continue</button>
     </div>
   `;
 }
 
-function login() {
+function doLogin() {
   const name = document.getElementById("name").value;
   if (!name) return;
 
   user = {
     name,
-    avatar: "",
     streak: 1
   };
 
@@ -38,163 +41,69 @@ function login() {
   render();
 }
 
-// ===== FEED =====
-function feedPage() {
+/* ---------- FEED ---------- */
+function feed() {
   document.getElementById("app").innerHTML = `
     <div class="card">
-      <h2>🔥 Court Feed</h2>
+      <div class="top">Hello, ${user.name}</div>
 
-      <input id="postText" placeholder="Log match (6-3 4-6 6-2)"/>
-      <button onclick="addPost()">Post Match</button>
+      <input id="text" placeholder="Log match result (6-3 4-6 6-2)"/>
+      <button onclick="post()">Log match</button>
+    </div>
 
-      <div style="margin-top:10px">
-        <button onclick="goProfile()">Profile</button>
-        <button onclick="leaderboard()">Leaderboard 🏆</button>
-        <button onclick="logout()">Logout</button>
+    <div class="card">
+      <div class="grid">
+        <div class="stat">
+          <h2>${posts.length}</h2>
+          <p>Matches</p>
+        </div>
+        <div class="stat">
+          <h2>${user.streak}</h2>
+          <p>Streak</p>
+        </div>
+        <div class="stat">
+          <h2>${wins()}</h2>
+          <p>Wins</p>
+        </div>
       </div>
     </div>
 
-    <div id="feed"></div>
+    ${renderPosts()}
   `;
-
-  renderPosts();
 }
 
-// ===== ADD POST =====
-function addPost() {
-  const text = document.getElementById("postText").value;
+function post() {
+  const text = document.getElementById("text").value;
   if (!text) return;
 
   const win = text.toLowerCase().includes("won");
 
   posts.unshift({
-    id: Date.now(),
-    user: user.name,
     text,
     win,
-    likes: 0,
-    comments: [],
     time: new Date().toLocaleString()
   });
 
-  // streak system
   if (win) user.streak++;
 
   save();
   render();
 }
 
-// ===== LIKE =====
-function likePost(id) {
-  posts = posts.map(p => {
-    if (p.id === id) p.likes++;
-    return p;
-  });
-
-  save();
-  render();
+function wins() {
+  return posts.filter(p => p.win).length;
 }
 
-// ===== COMMENT =====
-function commentPost(id) {
-  const msg = prompt("Comment:");
-  if (!msg) return;
-
-  posts = posts.map(p => {
-    if (p.id === id) {
-      p.comments.push(msg);
-    }
-    return p;
-  });
-
-  save();
-  render();
-}
-
-// ===== POSTS =====
 function renderPosts() {
-  const feed = document.getElementById("feed");
-  if (!feed) return;
-
-  feed.innerHTML = "";
-
-  posts.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <b>${p.user}</b> ${p.win ? "🔥 WIN" : "🎾 MATCH"}<br/><br/>
-      ${p.text}<br/>
-      <small>${p.time}</small>
-
-      <div style="margin-top:10px">
-        ❤️ ${p.likes}
-        💬 ${p.comments.length}
-      </div>
-
-      <button onclick="likePost(${p.id})">Like</button>
-      <button onclick="commentPost(${p.id})">Comment</button>
-    `;
-
-    feed.appendChild(div);
-  });
-}
-
-// ===== PROFILE =====
-function goProfile() {
-  const myPosts = posts.filter(p => p.user === user.name);
-
-  document.getElementById("app").innerHTML = `
+  return posts.map(p => `
     <div class="card">
-      <h2>${user.name} 👤</h2>
-      <p>🔥 Streak: ${user.streak}</p>
-
-      <button onclick="render()">Back</button>
-    </div>
-
-    ${myPosts.map(p => `
-      <div class="card">
-        ${p.win ? "🔥 WIN" : "🎾"} ${p.text}
+      <div class="post-title">
+        ${p.win ? "🔥 WIN" : "🎾 MATCH"} — ${p.text}
       </div>
-    `).join("")}
-  `;
-}
 
-// ===== LEADERBOARD =====
-function leaderboard() {
-  let users = {};
+      <div class="post-meta">${p.time}</div>
 
-  posts.forEach(p => {
-    if (!users[p.user]) users[p.user] = 0;
-    if (p.win) users[p.user]++;
-  });
-
-  const sorted = Object.entries(users)
-    .sort((a,b) => b[1]-a[1]);
-
-  document.getElementById("app").innerHTML = `
-    <div class="card">
-      <h2>🏆 Leaderboard</h2>
-      <button onclick="render()">Back</button>
+      ${p.win ? `<div class="badge">Performance +1</div>` : ""}
     </div>
-
-    ${sorted.map(u => `
-      <div class="card">
-        ${u[0]} — ${u[1]} wins
-      </div>
-    `).join("")}
-  `;
-}
-
-// ===== LOGOUT =====
-function logout() {
-  user = null;
-  save();
-  render();
-}
-
-// ===== POSTS RENDER =====
-function render() {
-  if (!user) return loginPage();
-  return feedPage();
+  `).join("");
 }
