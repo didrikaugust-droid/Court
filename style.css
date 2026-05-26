@@ -3,15 +3,15 @@
 body {
   margin:0;
   font-family:Inter;
-  background:#f5f6f8;
+  background:#f4f6f9;
   color:#111;
 }
 
-/* NAV */
+/* TOP BAR */
 nav {
   display:flex;
   justify-content:space-between;
-  padding:14px 20px;
+  padding:14px 18px;
   background:white;
   border-bottom:1px solid #eee;
   position:sticky;
@@ -24,36 +24,28 @@ nav {
   color:#fc5200;
 }
 
-/* LAYOUT */
+/* APP CONTAINER */
 .container {
-  max-width:950px;
-  margin:0 auto;
+  max-width:980px;
+  margin:auto;
   padding:18px;
+  padding-bottom:90px;
 }
 
-/* CARD (Strava style depth) */
+/* CARD (premium SaaS depth) */
 .card {
   background:white;
-  border:1px solid #eee;
   border-radius:16px;
   padding:14px;
   margin:12px 0;
-  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  border:1px solid #eee;
+  box-shadow:0 2px 14px rgba(0,0,0,0.05);
   transition:0.25s ease;
 }
 
 .card:hover {
   transform:translateY(-4px);
-  box-shadow:0 8px 25px rgba(0,0,0,0.08);
-}
-
-/* INPUTS */
-input {
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border-radius:10px;
-  border:1px solid #ddd;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* BUTTON */
@@ -65,42 +57,51 @@ button {
   border-radius:999px;
   cursor:pointer;
   font-weight:600;
-  transition:0.2s;
 }
 
-button:hover {
-  transform:scale(1.03);
-  box-shadow:0 8px 20px rgba(252,82,0,0.3);
+/* INPUT */
+input {
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 
-/* TEXT */
-.small {
-  color:#777;
-  font-size:13px;
-}
-
+/* USER LINK */
 .user {
   color:#fc5200;
   font-weight:700;
   cursor:pointer;
 }
 
-/* GRID */
-.grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+/* SMALL TEXT */
+.small {
+  color:#777;
+  font-size:13px;
 }
 
-/* PROFILE HEADER */
-.profile {
+/* BOTTOM NAV (STRAVA FEEL) */
+.bottomNav {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
   background:white;
-  padding:16px;
-  border-radius:16px;
-  border:1px solid #eee;
+  border-top:1px solid #eee;
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
 }
 
-/* LIKE ANIMATION */
+.bottomNav button {
+  background:none;
+  color:#777;
+  font-weight:600;
+  border:none;
+}
+
+/* LIKE */
 .heart {
   cursor:pointer;
   transition:0.2s;
@@ -111,12 +112,32 @@ button:hover {
   color:#fc5200;
 }
 
-/* FADE IN FEED */
+/* MAP MOCK */
+.map {
+  height:120px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ddd,#f8f8f8);
+  margin-top:10px;
+  position:relative;
+  overflow:hidden;
+}
+
+.map::after {
+  content:"Court Activity Map";
+  position:absolute;
+  top:40%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:#999;
+  font-size:14px;
+}
+
+/* FADE */
 .fade {
-  animation:fade 0.4s ease;
+  animation:fade 0.3s ease;
 }
 
 @keyframes fade {
-  from {opacity:0; transform:translateY(10px);}
-  to {opacity:1; transform:translateY(0);}
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
 }
