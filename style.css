@@ -1,143 +1,185 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-body {
-  margin:0;
-  font-family:Inter;
-  background:#f4f6f9;
-  color:#111;
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#0b0f1a;
+  --muted:#6b7280;
+  --brand:#ff4d1a;
+  --brand2:#ff7a33;
+  --border:rgba(15,23,42,0.08);
 }
 
-/* TOP BAR */
-nav {
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* NAV */
+nav{
   display:flex;
   justify-content:space-between;
-  padding:14px 18px;
-  background:white;
-  border-bottom:1px solid #eee;
+  align-items:center;
+  padding:16px 22px;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
   position:sticky;
   top:0;
   z-index:10;
 }
 
-.logo {
+.logo{
   font-weight:800;
-  color:#fc5200;
+  letter-spacing:-0.8px;
+  font-size:18px;
+  background:linear-gradient(90deg,var(--brand),var(--brand2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* APP CONTAINER */
-.container {
-  max-width:980px;
-  margin:auto;
-  padding:18px;
-  padding-bottom:90px;
+/* LAYOUT */
+.container{
+  max-width:1050px;
+  margin:0 auto;
+  padding:22px;
+  padding-bottom:100px;
 }
 
-/* CARD (premium SaaS depth) */
-.card {
-  background:white;
-  border-radius:16px;
-  padding:14px;
+/* HERO CARD (MAIN IMPACT) */
+.heroCard{
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  color:white;
+  padding:22px;
+  border-radius:22px;
+  box-shadow:0 20px 60px rgba(255,77,26,0.25);
+  margin-bottom:18px;
+}
+
+.heroStats{
+  display:flex;
+  gap:20px;
+  margin-top:14px;
+}
+
+.heroStats div{
+  background:rgba(255,255,255,0.15);
+  padding:10px 12px;
+  border-radius:14px;
+  min-width:90px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
   margin:12px 0;
-  border:1px solid #eee;
-  box-shadow:0 2px 14px rgba(0,0,0,0.05);
+  box-shadow:0 6px 20px rgba(0,0,0,0.05);
   transition:0.25s ease;
 }
 
-.card:hover {
+.card:hover{
   transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-/* BUTTON */
-button {
-  background:#fc5200;
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
+  box-shadow:0 14px 40px rgba(0,0,0,0.08);
 }
 
 /* INPUT */
-input {
+input{
   width:100%;
-  padding:10px;
-  margin-top:8px;
-  border-radius:10px;
-  border:1px solid #ddd;
+  padding:12px;
+  margin-top:10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  outline:none;
 }
 
-/* USER LINK */
-.user {
-  color:#fc5200;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* SMALL TEXT */
-.small {
-  color:#777;
-  font-size:13px;
-}
-
-/* BOTTOM NAV (STRAVA FEEL) */
-.bottomNav {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:1px solid #eee;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-}
-
-.bottomNav button {
-  background:none;
-  color:#777;
-  font-weight:600;
+/* BUTTON */
+button{
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  color:white;
   border:none;
-}
-
-/* LIKE */
-.heart {
+  padding:11px 16px;
+  border-radius:999px;
+  font-weight:600;
   cursor:pointer;
   transition:0.2s;
 }
 
-.heart:hover {
-  transform:scale(1.2);
-  color:#fc5200;
+button:hover{
+  transform:scale(1.03);
+  box-shadow:0 10px 30px rgba(255,77,26,0.25);
 }
 
-/* MAP MOCK */
-.map {
+/* FEED CARD HEADER */
+.user{
+  font-weight:700;
+  color:var(--brand);
+  cursor:pointer;
+}
+
+/* SMALL TEXT */
+.small{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* MAP PREMIUM LOOK */
+.map{
   height:120px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#ddd,#f8f8f8);
-  margin-top:10px;
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,77,26,0.15), transparent),
+    linear-gradient(135deg,#f3f4f6,#ffffff);
+  margin-top:12px;
   position:relative;
   overflow:hidden;
 }
 
-.map::after {
-  content:"Court Activity Map";
+.map::after{
+  content:"Court Activity Heatmap";
   position:absolute;
-  top:40%;
+  top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  color:#999;
-  font-size:14px;
+  color:#9ca3af;
+  font-size:13px;
 }
 
-/* FADE */
-.fade {
-  animation:fade 0.3s ease;
+/* LIKE */
+.heart{
+  margin-top:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.2s;
 }
 
-@keyframes fade {
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
+.heart:hover{
+  transform:scale(1.08);
+  color:var(--brand);
+}
+
+/* BOTTOM NAV */
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-around;
+  padding:12px;
+}
+
+.bottomNav button{
+  background:none;
+  color:var(--muted);
+  font-weight:600;
 }
