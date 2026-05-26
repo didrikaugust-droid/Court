@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+  margin:0;
+  font-family:Inter;
+  background:#f5f6f8;
+  color:#111;
+}
+
+/* NAV */
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:14px 20px;
+  background:white;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo {
+  font-weight:800;
+  color:#fc5200;
+}
+
+/* LAYOUT */
+.container {
+  max-width:950px;
+  margin:0 auto;
+  padding:18px;
+}
+
+/* CARD (Strava style depth) */
+.card {
+  background:white;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:14px;
+  margin:12px 0;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  transition:0.25s ease;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* INPUTS */
+input {
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+/* BUTTON */
+button {
+  background:#fc5200;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.2s;
+}
+
+button:hover {
+  transform:scale(1.03);
+  box-shadow:0 8px 20px rgba(252,82,0,0.3);
+}
+
+/* TEXT */
+.small {
+  color:#777;
+  font-size:13px;
+}
+
+.user {
+  color:#fc5200;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* PROFILE HEADER */
+.profile {
+  background:white;
+  padding:16px;
+  border-radius:16px;
+  border:1px solid #eee;
+}
+
+/* LIKE ANIMATION */
+.heart {
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.heart:hover {
+  transform:scale(1.2);
+  color:#fc5200;
+}
+
+/* FADE IN FEED */
+.fade {
+  animation:fade 0.4s ease;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
+}
