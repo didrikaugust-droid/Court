@@ -1,185 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-:root{
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --text:#0b0f1a;
-  --muted:#6b7280;
-  --brand:#ff4d1a;
-  --brand2:#ff7a33;
-  --border:rgba(15,23,42,0.08);
+body {
+  font-family: Arial;
+  background: #f2f4f7;
 }
 
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Inter;
-  background:var(--bg);
-  color:var(--text);
+.card {
+  background: white;
+  padding: 14px;
+  margin: 10px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  animation: pop 0.2s ease;
 }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 22px;
-  background:rgba(255,255,255,0.8);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  z-index:10;
+@keyframes pop {
+  from { transform: scale(0.98); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-.logo{
-  font-weight:800;
-  letter-spacing:-0.8px;
-  font-size:18px;
-  background:linear-gradient(90deg,var(--brand),var(--brand2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+button {
+  margin: 5px;
+  background: #fc4c02;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-/* LAYOUT */
-.container{
-  max-width:1050px;
-  margin:0 auto;
-  padding:22px;
-  padding-bottom:100px;
-}
-
-/* HERO CARD (MAIN IMPACT) */
-.heroCard{
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
-  color:white;
-  padding:22px;
-  border-radius:22px;
-  box-shadow:0 20px 60px rgba(255,77,26,0.25);
-  margin-bottom:18px;
-}
-
-.heroStats{
-  display:flex;
-  gap:20px;
-  margin-top:14px;
-}
-
-.heroStats div{
-  background:rgba(255,255,255,0.15);
-  padding:10px 12px;
-  border-radius:14px;
-  min-width:90px;
-}
-
-/* CARD */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:16px;
-  margin:12px 0;
-  box-shadow:0 6px 20px rgba(0,0,0,0.05);
-  transition:0.25s ease;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 14px 40px rgba(0,0,0,0.08);
-}
-
-/* INPUT */
-input{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  outline:none;
-}
-
-/* BUTTON */
-button{
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
-  color:white;
-  border:none;
-  padding:11px 16px;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-button:hover{
-  transform:scale(1.03);
-  box-shadow:0 10px 30px rgba(255,77,26,0.25);
-}
-
-/* FEED CARD HEADER */
-.user{
-  font-weight:700;
-  color:var(--brand);
-  cursor:pointer;
-}
-
-/* SMALL TEXT */
-.small{
-  color:var(--muted);
-  font-size:13px;
-}
-
-/* MAP PREMIUM LOOK */
-.map{
-  height:120px;
-  border-radius:14px;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(255,77,26,0.15), transparent),
-    linear-gradient(135deg,#f3f4f6,#ffffff);
-  margin-top:12px;
-  position:relative;
-  overflow:hidden;
-}
-
-.map::after{
-  content:"Court Activity Heatmap";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  color:#9ca3af;
-  font-size:13px;
-}
-
-/* LIKE */
-.heart{
-  margin-top:10px;
-  cursor:pointer;
-  font-weight:600;
-  transition:0.2s;
-}
-
-.heart:hover{
-  transform:scale(1.08);
-  color:var(--brand);
-}
-
-/* BOTTOM NAV */
-.bottomNav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(12px);
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:space-around;
-  padding:12px;
-}
-
-.bottomNav button{
-  background:none;
-  color:var(--muted);
-  font-weight:600;
+button:hover {
+  transform: scale(1.05);
 }
