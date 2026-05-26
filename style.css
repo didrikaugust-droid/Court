@@ -1,5 +1,5 @@
 :root {
-  --bg: #f5f7fb;
+  --bg: #f6f7fb;
   --card: #ffffff;
   --text: #0f172a;
   --muted: #64748b;
@@ -8,27 +8,46 @@
 
 body {
   margin: 0;
-  font-family: Inter, system-ui;
+  font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
   background: var(--bg);
   display: flex;
   justify-content: center;
 }
 
-/* 📱 MOBILE CONTAINER */
-.container {
+/* 📱 APP FRAME */
+.app {
   width: 100%;
   max-width: 420px;
   min-height: 100vh;
   background: var(--bg);
-  padding-bottom: 80px; /* space for bottom nav */
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* CARDS */
+/* SCREEN TRANSITIONS */
+.screen {
+  padding: 18px;
+  animation: fade 0.25s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* APP BAR */
+.header {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+/* CARD */
 .card {
   background: var(--card);
   border-radius: 18px;
-  padding: 16px;
-  margin: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
 }
 
@@ -44,33 +63,16 @@ input {
 /* BUTTON */
 button {
   width: 100%;
-  margin-top: 10px;
   padding: 12px;
   border-radius: 12px;
   border: none;
   background: var(--accent);
   color: white;
   font-weight: 700;
+  margin-top: 10px;
 }
 
-/* HEADER */
-.top {
-  font-size: 20px;
-  font-weight: 800;
-}
-
-/* STATS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.stat {
-  text-align: center;
-}
-
-/* 📱 BOTTOM NAV */
+/* BOTTOM NAV */
 .nav {
   position: fixed;
   bottom: 0;
@@ -87,11 +89,10 @@ button {
 
 .nav button {
   background: none;
-  color: #64748b;
+  color: var(--muted);
   font-size: 12px;
-  padding: 6px;
 }
 
-.nav button.active {
+.nav .active {
   color: var(--accent);
 }
